@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 import 'package:route_authentication/auth_service.dart';
 import 'package:route_authentication/routes.dart';
 
@@ -19,12 +19,13 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routerConfig: AppRoutes.routes,
+      initialRoute: AppRoutes.loginRoute,
+      getPages: AppRoutes.routes,
     );
   }
 }
@@ -47,7 +48,8 @@ class _LoginState extends State<LoginView> {
           child: ElevatedButton(
               onPressed: () {
                 AuthService.authenticated = true;
-                GoRouter.of(context).go(AppRoutes.DashboardRoute);
+                Get.toNamed(AppRoutes.dashboardRoute);
+                // GoRouter.of(context).go(AppRoutes.DashboardRoute);
               },
               child: const Text("Login")),
         ));
